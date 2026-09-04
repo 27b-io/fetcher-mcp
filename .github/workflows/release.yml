@@ -55,7 +55,9 @@ jobs:
   publish:
     needs: release
     if: ${{ needs.release.outputs.release_created }}
-    runs-on: lab
+    # Hosted, not `lab` (LAB-1302): fetcher-mcp is public, and the private-only
+    # runner group that protects the lab pool cannot admit a public repo.
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
